@@ -1,0 +1,290 @@
+---
+title: "Muestreo y estadística descriptiva"
+#author: "Ing. Gustavo Andrade Miranda, Msc, PhD"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+institute: "Universidad de Guayaquil"
+fontsize: 10pt
+output: 
+  beamer_presentation:
+      theme: "Madrid"
+      colortheme: "default"
+      fonttheme: "professionalfonts"
+header-includes:
+   - \usepackage{ragged2e}
+   - \usepackage[spanish,activeacute]{babel}      
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Muestreo 
+
+**"Existen tres clases de mentiras: mentiras, viles mentiras y estadísticas". Se ha dicho que "las cifras no mienten, pero los mentirosos también usan cifras"**
+
+- Los datos muestrales deben reunirse de una forma adecuada, como a
+través de un proceso de selección aleatoria.
+
+- Si los datos muestrales no se reúnen de forma apropiada, resultarán tan
+inútiles que ninguna cantidad de tortura estadística podrá salvarlos.
+
+## Muestras de respuesta voluntaria (o muestra autoseleccionada)
+
+**Es aquella en que los propios sujetos deciden ser incluidos.**
+
+- Encuestas por Internet, donde los sujetos deciden si responden o no.
+
+- Encuestas por correo, donde los sujetos deciden si responden o no.
+
+- Encuestas telefónicas, donde anuncios televisivos, de radio o de periódicos
+le piden que llame voluntariamente a un número especial para registrar su
+opinión.
+
+\begin{alertblock}{NOTA}
+Con este tipo de muestras de respuesta voluntaria sólo se logran conclusiones válidas
+sobre el grupo de gente específico que decidió participar; aunque una práctica
+común consiste en afirmar o sacar conclusiones incorrectas sobre una población
+más grande. Desde un punto de vista estadístico, una muestra de este tipo es defectuosa
+y no debe usarse para hacer afirmaciones generales sobre una población
+más grande.
+\end{alertblock}
+
+
+## Fuente de los Datos (I)
+ **Los métodos estadísticos se rigen por los datos. Por lo regular obtenemos datos de dos fuentes distintas: los estudios observacionales y los experimentos.**
+
+- En un estudio observacional, vemos y medimos características específicas, pero no intentamos modificar a los sujetos que estamos estudiando.
+
+- En un experimento aplicamos algunos tratamientos y luego procedemos a observar sus efectos sobre los sujetos (en los experimentos, a los sujetos se les denomina unidades experimentales).
+
+
+## Fuente de los Datos (II)
+
+\centering
+```{r, out.width="230px", out.height="230px"}
+knitr::include_graphics("imagenes/disenoExperimentos.jpg")
+```
+
+## Diseño de experimentos (I)
+
+**1. Control de los efectos de las variables.**
+  
+### Estudio a ciegas
+Una técnica en que el sujeto no sabe si está recibiendo un tratamiento o un placebo
+  
+### Diseño de bloques aleatorio
+Utilice si está realizando un experimento para probar uno o más tratamientos
+diferentes. Forme bloques de sujetos con características similares. Asigne los tratamientos de manera aleatoria a los sujetos dentro de cada bloque.
+  
+### Diseño experimental completamente aleatorio
+Es completamente aleatorio, los sujetos se asignan a distintos grupos de tratamiento
+mediante un proceso de selección aleatoria.
+
+### Diseño rigurosamente controlado
+Los sujetos se eligen cuidadosamente, de manera que quienes reciban cada tratamiento
+sean similares en los aspectos que son importantes para el experimento.
+
+## Diseño de experimentos (II)
+
+**2. Réplica y tamaño de la muestra.**
+Las muestras deben ser lo suficientemente grandes para que el comportamiento errático, que es característico
+de muestras muy pequeñas, no disfrace los efectos verdaderos de los distintos tratamientos.
+
+La repetición de un experimento sobre un grupo de sujetos suficientemente grande se conoce como réplica
+
+\begin{alertblock}{Nota}
+Utilice una muestra de un tamaño que sea lo bastante grande para
+distinguir la verdadera naturaleza de cualquiera de los efectos, y
+obtenga la muestra utilizando un método apropiado, como uno basado
+en la aleatoriedad.
+\end{alertblock}
+
+
+## Diseño de experimentos (III)
+
+**3. Aleatoriedad y otras estrategias de muestreo**
+Si los datos muestrales no se reúnen de forma adecuada, resultarían
+tan inútiles que ninguna cantidad de tortura estadística podrá salvarlos.
+
+- En una **muestra aleatoria** los miembros de la población se seleccionan de
+forma que cada miembro individual tenga la misma posibilidad de ser elegido.
+
+- Una **muestra aleatoria simple** de n sujetos se selecciona de manera que cada
+posible muestra del mismo tamaño n tenga la misma posibilidad de ser elegida.
+
+- Una **muestra probabilística** implica seleccionar miembros de una población de forma que cada miembro tenga una posibilidad conocida (aunque no necesariamente la misma) de ser elegido.
+
+## Diseño de experimentos (IV)
+
+**3. Aleatoriedad y otras estrategias de muestreo**
+\begin{columns} 
+\column{0.60\textwidth}
+
+```{r, out.width="200px", out.height="200px"}
+knitr::include_graphics("imagenes/muestreo.jpg")
+```
+
+\column{0.40\textwidth}
+\justifying
+El muestreo por conglomerados usa a todos los miembros de una muestra de conglomerados; en tanto que el muestreo estratificado emplea una muestra de los miembros de todos los estratos.
+
+\end{columns} 
+
+## Diseño de experimentos (V)
+
+**3. Aleatoriedad y otras estrategias de muestreo**
+
+Un **diseño de muestreo de etapas múltiples** implica la selección
+de una muestra en diferentes pasos, los cuales suelen incluir distintos procedimientos
+de muestreo.
+
+\begin{alertblock}{Nota}
+Es un diseño de muestreo complejo; no obstante, es mucho más práctico y menos
+costoso que utilizar un diseño más sencillo, como el muestreo aleatorio simple.
+\end{alertblock}
+
+## Errores de muestreo
+
+No importa lo bien que usted planee y ejecute el proceso de recolección de muestras, es probable que ocurra algún error en los resultados. Por ejemplo, seleccione 1000 adultos al azar, pregúnteles si se graduaron de bachillerato y registre el porcentaje de respuestas afirmativas en la muestra. Si usted elige otra muestra de 1000 adultos al azar, es probable que obtenga un porcentaje diferente en esa muestra. Esto se conoce como **variación del muestreo**
+
+- Un **error de muestreo** es la diferencia entre el resultado de una muestra y el
+verdadero resultado de la población; este error es consecuencia de las fluctuaciones
+por el azar.
+
+
+- Un **error que no es de muestreo** sucede cuando los datos muestrales se obtienen,
+registran o analizan de forma incorrecta (como cuando se selecciona
+una muestra sesgada, cuando se usa un instrumento de medición defectuoso
+o cuando se copian los datos de forma incorrecta).
+
+
+
+## Otros Errores comunes (I)
+
+**Las conclusiones no se deben basar en muestras demasiado pequeñas.**
+
+**Gráficas**
+
+\centering
+```{r, out.width="200px", out.height="150px"}
+knitr::include_graphics("imagenes/grafica.jpg")
+```
+
+## Otros Errores comunes (II)
+
+**Pictogramas**
+
+\centering
+```{r, out.width="200px", out.height="100px"}
+knitr::include_graphics("imagenes/pictogramas.jpg")
+```
+
+**Preguntas predispuestas** 
+
+- "¿Debería el presidente utilizar su poder de veto para eliminar los desperdicios?" 97%
+
+- "¿Debería el presidente utilizar su poder de veto o no?" 57%
+  
+## Otros Errores comunes (III)
+**Orden de las preguntas**
+
+- ¿Cree usted que el tránsito vehicular contribuye a la contaminación del aire
+más o menos que la industria?
+
+- ¿Cree usted que la industria contribuye a la contaminación del aire más o
+menos que el tránsito vehicular?
+
+Cuando se presentó primero el tránsito, el 45% culpó a este factor, y el 27% a la industria; cuando la industria se presentó primero, el 24% culpó al tránsito y el 57% culpó a la industria. 
+
+**Datos Faltantes**
+
+
+**Correlación y causalidad**
+
+Correlación no implica causalidad. Esto significa que cuando encontramos una asociación estadística entre dos
+variables, no podemos concluir que una de las variables sea causa de (o lo que afecta directamente a) la otra variable.
+
+## Otros Errores comunes (IV)
+
+**Estudios para el propio beneficio**
+Los estudios reciben el patrocinio de grupos con intereses específicos que buscan promover
+
+**Números precisos**
+En la actualidad 16,620,021 es el número de habitantes en el Ecuador. En este caso, el número es un estimado y sería mejor decir que el número de habitantes es aproximadamente de 16 millones.
+
+**Imágenes parciales**
+"El 90% de todos nuestros automóviles, vendidos en este país en los últimos 10 años, continúa circulando". Sin embargo el 90% de los automóviles que el anunciante vendió en este país se vendieron durante los últimos
+tres años.
+
+## Ejercicios en clase (I)
+
+1. **Una ingeniero que supervisa la calidad quiere inspeccionar rollos de papel tapiz para obtener información acerca de la tasa de fallas que tiene la imprenta. Decide tomar una muestra de 50 rollos de la producción de un día. Cada hora durante cinco horas, toma los diez últimos rollos producidos y cuenta el número de fallas de cada uno. ¿Ésta es una muestra aleatoria simple?** 
+
+ <!--  No. No todo subconjunto de 50 rollos de papel tapiz tiene la misma probabilidad de pertenecer
+a la muestra. Para formar una muestra aleatoria simple, la ingeniero necesitaría asignar un
+número a cada rollo producido durante el día y después generar números aleatorios para determinar
+con qué rollos se forma la muestra. --> 
+
+2. **Un ingeniero civil acaba de recibir una remesa de mil bloques de hormigón, que pesan aproximadamente 50 libras cada uno. Los bloques se han entregado en una gran pila. El ingeniero quiere investigar la fuerza de compresión de los bloques midiendo las fuerzas en una muestra de diez bloques. Para tomar una muestra aleatoria simple se requeriría sacar bloques del centro y de la parte inferior de la pila, lo que puede ser muy difícil. Por esta razón, el ingeniero puede tomar una muestra simplemente tomando diez bloques de la parte superior de la pila.**
+
+ <!--  Para tomar una muestra aleatoria simple se requeriría sacar bloques del centro y de la parte inferior
+de la pila, lo que puede ser muy difícil. Por esta razón, el ingeniero puede tomar una muestra
+simplemente tomando diez bloques de la parte superior de la pila. Una muestra así se llama
+muestra de conveniencia. --> 
+
+## Ejercicios en clase (II)
+
+3. **Un inspector de calidad prueba 40 pernos de una gran remesa y mide la longitud de cada uno. Descubre que 34 de ellos (85%) cubre la especificación de longitud. Llega entonces a la conclusión de que exactamente 85% de los pernos de la remesa satisfacen la especificación. Por otra parte, el supervisor del inspector concluye que la proporción de pernos buenos está cerca de 85% con cierta probabilidad, pero que no es exactamente igual. ¿Cuál es la conclusión correcta?**
+
+<!-- Debido a la variación del muestreo, las muestras aleatorias simples no reflejan a la población
+perfectamente. Sin embargo, con frecuencia están bastante cerca. Por tanto, resulta adecuado
+inferir que la proporción de pernos buenos en la remesa esté cerca de la proporción de muestra,
+que es de 85%, con cierta probabilidad. Sin embargo, no es probable que la proporción
+de población sea igual a 85 por ciento.  --> 
+
+4. **Determine si la descripción dada corresponde a un estudio observacional o a un experimento. Control de calidad. La Food and Drug Administration de Estados Unidos elige al azar una muestra de grageas de aspirina Bayer, y mide la exactitud de la cantidad de aspirina en cada gragea.**
+
+<!-- observacional --> 
+
+
+## Ejercicios en clase (III)
+
+**Identifique el tipo de muestreo que se utilizó: aleatorio, sistemático, de conveniencia, estratificado o por conglomerados.**
+
+5. Un investigador de la Universidad de Guayaquil obtiene datos sobre los efectos del alcohol al conducir, examinando informes de accidentes automovilísticos de los últimos cinco años.
+<!-- retrospectivo -->
+
+6. ECUAVISA encuesta a 5000 hogares para determinar la proporción de éstos que sintonizan el noticiero de las 20 horas.
+<!-- transversal -->
+
+7. Psicología del trauma. Un investigador del hospital Monte Sinaí de la ciudad de Nueva York, planea obtener datos al hacer un seguimiento (hasta el año 2015) a los hermanos de las víctimas que perecieron en el ataque terrorista al Word Trade Center el 11 de septiembre de 2001.
+<!-- prospectivo -->
+
+
+8. Puesto de revisión de sobriedad donde se detenía y entrevistaba a cada quinto conductor.
+<!-- sistemático -->
+
+## Ejercicios en clase (IV)
+
+9. Educación y deportes. Un investigador de la empresa de equipo deportivo Spaulding estudia la relación entre el nivel académico y la participación en cualquier deporte. El investigador hace una encuesta a 40 golfistas, 40 tenistas y 40 nadadores, todos elegidos al azar.
+<!-- estratificado -->
+
+10. Hacer trampa. Un investigador del Internal Revenue Service estudia las trampas en las declaraciones de impuestos, al encuestar a todos los meseros y las meseras de 20 restaurantes seleccionados al azar.
+<!-- conglomerados. -->
+
+11. Encuestas telefónicas. En una encuesta de Gallup de 1059 adultos, los sujetos encuestados fueron seleccionados, usando de una computadora para generar aleatoriamente los números telefónicos a los que después se llamó.
+<!-- aleatorio -->
+
+12. Estudiantes que beben. La Universidad de Guayaquil, motivada por un estudiante que murió en estado de ebriedad, realizó una investigación de estudiantes que beben, seleccionando al azar 10 diferentes salones de clase y entrevistando a todos los estudiantes en cada uno de esos grupos.
+<!-- conglomerados. -->
+
+
+## Ejercicios en clase (V)
+
+13. Muestra de conveniencia. Un profesor de estadística obtiene una muestra de estudiantes, al seleccionar a los primeros 10 que entran a su salón de clases. ¿Este plan de muestreo da como resultado una muestra aleatoria? ¿Una muestra aleatoria simple? Explique.
+<!--26.- no,  -->
+
+14. Muestreo de estudiantes. Un salón de clases tiene 36 estudiantes sentados en seis filas diferentes, con seis estudiantes en cada fila. El profesor tira un dado para determinar una fila, y luego lo tira nuevamente para elegir a un estudiante específico de la fila. Este proceso se repite hasta completar una muestra de 6 estudiantes. ¿Este plan de muestreo da como resultado una muestra aleatoria? ¿Una muestra aleatoria simple? Explique.
+<!--29.- Sí, sí. Cada estudiante tiene la misma probabilidad, y cada muestra
+de tamaño seis tiene las mismas posibilidades de ser elegida.  -->
+

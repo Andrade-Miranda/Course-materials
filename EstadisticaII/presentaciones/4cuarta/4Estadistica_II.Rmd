@@ -1,0 +1,385 @@
+---
+title: "Intervalos de confianza"
+#author: "Ing. Gustavo Andrade Miranda, Msc, PhD"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+institute: "Universidad de Guayaquil"
+fontsize: 10pt
+output: 
+  beamer_presentation:
+      theme: "Madrid"
+      colortheme: "default"
+      fonttheme: "professionalfonts"
+header-includes:
+   - \usepackage{ragged2e}
+   - \usepackage[spanish,activeacute]{babel} 
+   - \usepackage{amsmath}
+   - \usepackage{amsfonts}
+   - \usepackage{amssymb}  
+   - \usepackage{booktabs}
+   - \DeclareUnicodeCharacter{03BC}{\ensuremath{\mu}}
+   - \DeclareUnicodeCharacter{03C3}{\ensuremath{\sigma}}
+   - \DeclareUnicodeCharacter{2264}{\ensuremath{\leq}}
+---
+   
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introducción
+
+- $\hat{p}$ representa la estimación de una probabilidad de éxito p
+- $\bar{X}$ representa la estimación de la media poblacional $\mu$.
+- $S$ representa la estimación de la desviación estandar poblacional $\sigma$.
+
+Son llamadas estimaciones puntuales, porque son sólo números, o puntos. Un hecho importante de las estimaciones puntuales es que casi nunca son exactamente iguales a los valores reales que están estimando.
+
+
+## Estimación por intervalos
+
+Se denomina a la estimación de parámetros poblacionales en la que utilizando una muestra aleatoria $X^T=[X_1, X_2, ... X_n]$ se infiere acerca de $\theta$ pero en lugar de un solo punto se define un conjunto de puntos A, con cotas superior e inferior.
+
+$$ A= \{ \theta \in | \ L_i(X) \leq \theta \leq L_s(X) \}$$
+
+- Longitud del intervalo $\lambda(X)$
+    - Finita o infinita
+    
+- Intervalos de confianza $[L_i(X),L_s(X)]$ unilaterales, bilaterales
+
+## Interpretación de los intervalos de confianza
+
+CI=(0.381 a 0.497)
+
+**Correcta:** "Tenemos una confianza del 95% de que el intervalo de 0.381 a
+0.497 realmente contiene el valor verdadero de p". Esto significa
+que si seleccionamos muchas muestras diferentes de tamaño 280 y
+construimos los intervalos de confianza correspondientes, el 95%
+de ellos incluirían realmente el valor de la proporción poblacional
+p. (Note que en esta interpretación correcta, el nivel del 95% se
+refiere a la tasa de éxitos del proceso, utilizada para estimar la
+proporción, y no a la proporción de la población en sí).
+
+
+**Errónea:** "Existe un 95% de probabilidades de que el valor real de p esté
+entre 0.381 y 0.497".
+
+
+
+## Intervalo de confianza para la media poblacional
+
+```{r normle22,fig.height = 3, fig.width = 4.5, fig.align = "center", echo = FALSE,warning=FALSE}
+mu =0 #media
+sigma =1 #variaci??n estandar
+
+#dibujar la distribuci??n normal
+range =seq(mu-(5*sigma),mu+(5*sigma),0.001)
+y= dnorm(range,mu,sigma)
+plot(range,y,main=, type='l',ylim=c(0,max(y)+0.001), axes=TRUE,xlab="X",ylab="")
+```
+
+$$N=100 \ \ \bar{X}=169 \ \ \ \mu=???$$
+
+
+## Intervalo de confianza para la media - Caso I
+
+\centering
+```{r, out.width="350px", out.height="150px"}
+knitr::include_graphics("imagenes/caso1.jpg")
+```
+
+
+## Intervalo de confianza para la media - Caso I
+
+\centering
+```{r, out.width="350px", out.height="150px"}
+knitr::include_graphics("imagenes/caso1_1.jpg")
+```
+
+## Intervalo de confianza 
+
+\centering
+```{r, out.width="300px", out.height="150px"}
+knitr::include_graphics("imagenes/confianza.jpg")
+```
+
+
+## Ejercicios I
+
+El tiempo diario que los adultos de una determinada ciudad dedican a actividades deportivas, se aproxima por una variable aleatoria con distribución normal de desviación tipica $\sigma=20$
+
+a) Calcule un intervalo de confianza al 90% para $\mu$ cuando se toma una muestra aleatoria simple de tamaño 250 y media 90
+
+
+b) Que tamaño mínimo debe tener una muestra aleatoria simple para que le error máximo cometido en la estimación de $\mu$ por la media muestral sea menor que 1 minuto con el mismo intervalo de confianza
+
+
+
+## Ejercicios II
+
+A partir de una muestra aleatoria simple de 64 frascos de mermelada se ha obtenido un intervalo de confianza para se ha obtenido un intervalo de confianza para $\mu$ con un error de estimación de 2.35 gramos
+
+a) Determine el nivel de confianza utilizado para construir ese intervalo de confianza suponiendo un $\sigma=10$
+
+
+
+## Ejercicios III
+
+Las notas de un test de aptitud siguen una distribución Normal con desviación 28.2. Una muestra aleatoria de 9 alumnos nos da los siguientes resultados
+
+$$ \sum_{i=1}^n x_i = 1098 \ \ \  \sum_{i=1}^n {x_i}^2=138148 $$
+
+a) Construya un intervalo de confianza al 90% para la media poblacional.
+
+```{r normle1,fig.height = 3, fig.width = 4.5, fig.align = "center", echo = TRUE,warning=FALSE}
+# mean and confidence interval
+conf.level = 0.90
+N=9
+z = qnorm((1 - conf.level)/2, lower.tail = FALSE)
+xbar = 1098/N
+sdx = 28.2/sqrt(N)
+c(xbar - (z * sdx), xbar + (z * sdx))
+```
+
+## Ejercicios III - continuación
+
+b) Razonar sin hacer cálculos si la longitud de un intervalo al 95% será menor, mayor o igual que el intervalo de confianza al 90%.
+
+
+
+c) ¿Cuál será el tamaño de la muestra mínimo necesario para obtener un intervalo al 90% de nivel de confianza, con longitud 10?
+
+
+```{r confianza,fig.height = 3, fig.width = 4.5, fig.align = "center", echo = TRUE,warning=FALSE}
+# mean and confidence interval
+conf.level = 0.90
+z = qnorm((1 - conf.level)/2, lower.tail = FALSE)
+error=5
+n=(z*28.2/error)^2
+n
+```
+
+## Diferentes intervalos de confianza para la media - Caso I
+
+**68%  95%  y 99%**
+\centering
+```{r, out.width="350px", out.height="200px"}
+knitr::include_graphics("imagenes/intervalos.jpg")
+```
+
+
+## Intervalo de confianza para la media - Caso II
+
+
+\centering
+```{r, out.width="350px", out.height="150px"}
+knitr::include_graphics("imagenes/caso2.jpg")
+```
+
+No use la estadística t de Student si la muestra contiene datos atípicos. Para que la estadística t de Student sea válida, la muestra debe provenir de una población que es aproximadamente normal. Tales muestras rara vez contienen datos atípicos. Por tanto, los métodos que implican la estadística t de Student no se deben utilizar en muestras que contienen datos atípicos.
+
+## Intervalo de confianza para la media - Caso II
+
+```{r tconfianza,fig.height = 4, fig.width = 5.3, fig.align = "center", echo = FALSE,warning=FALSE}
+x <- seq(-4, 4, length=100)
+hx <- dnorm(x)
+
+degf <- c(1, 3, 8, 30)
+colors <- c("red", "blue", "darkgreen", "gold", "black")
+labels <- c("df=1", "df=3", "df=8", "df=30", "normal")
+
+plot(x, hx, type="l", lty=2, xlab="",
+  ylab="", main="Comparación entre distribuciones T-student")
+
+for (i in 1:4){
+  lines(x, dt(x,degf[i]), lwd=2, col=colors[i])
+}
+
+legend("topright", inset=.05, title="Distributions",
+  labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)
+```
+
+## Ejercicios - caso II
+En un estudio de los efectos sobre los bebés del consumo de cocaína durante el embarazo, se obtuvieron los siguientes datos de pesos al nacer: $N=19$, $\bar{X}=2700 gr$ y $s=645gr$. Construya un estimado del intervalo de confianza del 95% de $\mu$, el peso medio al nacer de todos los niños
+
+$$\bar{X}-t_{\alpha/2}\frac{s}{\sqrt{{n}}} < \mu < \bar{X}+t_{\alpha/2}\frac{s}{\sqrt{{n}}}$$
+$$2700-2.1\frac{645}{\sqrt{{19}}} < \mu < 2700+ 2.1\frac{645}{\sqrt{{19}}}$$
+$$2389.256 < \mu < 3010.744$$
+
+
+
+## Ejercicios - caso II
+
+```{r tstudent,fig.height = 4, fig.width = 5.3, fig.align = "center", echo = TRUE,warning=FALSE}
+Datos=rnorm(19,mean = 2700, sd = 645)
+t.test(Datos,alternative ="two.sided", conf.level = 0.95)
+```
+
+## Ejercicios - caso II
+
+Construya un intervalo que tenga 95% de confianza para el tiempo medio de recarga de baterias que se utilizan para laptops y para ipads, si se conoce que ese tiempo de recarga es N($\mu$,$\sigma^2$) y al recargar 17 de estas baterías se obtiene una media $\bar{x}=272$ minutos y una desviación típica de $s=20$ minutos
+\\
+\\
+
+Tenemos $\bar{x}=272$, suponiendo $X \sim N(\mu,\sigma)$ trabajamos con una distribución T con 16 grados de libertad $t_{0.025}=2.120$
+$$\bar{X}-t_{\alpha/2}\frac{s}{\sqrt{{n}}} < \mu < \bar{X}+t_{\alpha/2}\frac{s}{\sqrt{{n}}}$$
+$$272-2.120\frac{20}{\sqrt{{17}}} < \mu < 272+ 2.120\frac{20}{\sqrt{{17}}}$$
+$CI(261.717, 282.283)$
+
+## Intervalo de confianza para la media - RESUMEN
+
+\centering
+```{r, out.width="300px", out.height="200px"}
+knitr::include_graphics("imagenes/resumen1.jpg")
+```
+
+## Intervalo de confianza para la media - RESUMEN
+
+\centering
+```{r, out.width="250px", out.height="200px"}
+knitr::include_graphics("imagenes/resumen2.jpg")
+```
+
+## Ejercicio ADICIONAL
+El artículo “Direct Strut-and-Tie Model for Prestressed Deep Beams” (K. Tan, K. Tong y C.
+Tang, en Journal of Structural Engineering, 2001:1076-1084) presenta mediciones de la fuerza
+nominal de corte (en kN) para una muestra de 15 vigas de concreto. Los resultados son:
+
+580 400 428 825 850 875 920 550
+575 750 636 360 590 735 950
+
+```{r ejem,fig.height = 3, fig.width = 2.8, fig.align = "center", echo =FALSE,warning=FALSE}
+datos=c(580,400,428,825,850,875,920,550,575,750,636,360,590,735,950)
+par(cex.axis=0.7) 
+par(cex.lab=0.5) 
+boxplot(datos, main="Deep Beams Data", 
+   xlab="", ylab="Fuerza de corte (kN)")
+stripchart(datos, vertical = TRUE, data = datos, 
+    method = "jitter", add = TRUE, pch = 20, col = 'blue')
+```
+
+
+## ## Ejercicio ADICIONAL
+
+```{r tstudt2,fig.height = 4, fig.width = 5.3, fig.align = "center", echo = TRUE,warning=FALSE}
+datos=c(580,400,428,825,850,875,920,550,575,750,636,360,590,735,950)
+t.test(datos,alternative ="two.sided", conf.level = 0.99)
+```
+
+
+## Intervalo de confianza para la varianza
+
+\centering
+```{r, out.width="350px", out.height="150px"}
+knitr::include_graphics("imagenes/chi.jpg")
+```
+
+## Intervalo de confianza para la varianza
+
+```{r chii,fig.height = 4, fig.width = 5.6, fig.align = "center", echo = FALSE,warning=FALSE}
+curve(dchisq(x,1),xlim=c(0,15),ylim=c(0,0.6),ylab="",xlab="")
+curve(dchisq(x,2),col="red",lty=2,add=TRUE)
+curve(dchisq(x,3),col="blue",lty=3,add=TRUE)
+curve(dchisq(x,5),col="dark green",lty=4,add=TRUE)
+curve(dchisq(x,10),col="brown",lty=5,add=TRUE)
+legend(12,0.55,c("k=1","k=2","k=3","k=5","k=10"),
+       col=c("black","red","blue","dark green","brown"),lty=1:5)
+```
+
+
+## Intervalo de confianza para la varianza - Ejemplos
+
+En la actualidad las monedas de 1 centavo de dólar se acuñan con una
+desviación estándar de 0.0165 g. Se prueba un nuevo equipo con la intención de mejorar la calidad al reducir la variación. Se obtiene una muestra aleatoria simple de 10 monedas de 1 centavo acuñadas con el equipo nuevo. Una gráfica cuantilar normal y un histograma indican que los pesos provienen de una población distribuida normalmente, y la muestra tiene una desviación estándar de 0.0125 g. Utilice los resultados muestrales para construir un estimado de un intervalo de confianza del 95% de $\sigma$, la desviación estándar de los pesos de monedas de 1 centavo fabricadas con el equipo nuevo. Con base en los resultados, ¿parece que el equipo nuevo sirve para reducir la variación de los pesos?
+
+
+## Intervalo de confianza para media y varianza - EJERCICIO
+Para verificar los efectos del calentamiento global del planeta, se efectuán medidas de la temperatura para un día cualquiera del mes de Junio de 2010 en diez lugares estratégicos de Guayaquil. Las lecturas, en grados centígrados, son los siguientes: 28 25 29 27 27 30 25 24 23 29.Construya intervalos con 99% de confianza para la medida poblacional $\mu$ y de 95% de confianza para la varianza $\sigma^2$
+
+```{r eje1,fig.height = 3, fig.width = 2.8, fig.align = "center", echo =FALSE,warning=FALSE}
+datos=c(28,25,29,27,27,30,25,24,23,29)
+par(cex.axis=0.7) 
+par(cex.lab=0.5) 
+boxplot(datos, main="Temperatura", 
+   xlab="", ylab="Centigrados")
+stripchart(datos, vertical = TRUE, data = datos, 
+    method = "jitter", add = TRUE, pch = 20, col = 'blue')
+```
+
+
+## Intervalo de confianza para media y varianza - EJERCICIO
+
+```{r tst,fig.height = 1, fig.width = 1.3, fig.align = "center", echo = TRUE,warning=FALSE}
+datos=c(28,25,29,27,27,30,25,24,23,29)
+t.test(datos,alternative ="two.sided", conf.level = 0.99)
+c(((10-1)*sd(datos)^2)/qchisq(c(.025),df=9, lower.tail=FALSE),
+((10-1)*sd(datos)^2)/qchisq(c(.975),df=9, lower.tail=FALSE))
+```
+
+
+## Intervalos de confianza para proporciones
+
+\centering
+```{r, out.width="300px", out.height="100px"}
+knitr::include_graphics("imagenes/propor.jpg")
+```
+
+## Intervalos de confianza para proporciones - Ejemplo
+**Tasa de éxito de la terapia de contacto**. En 280 ensayos con terapeutas
+de contacto, la mano correcta fue elegida en 123 ensayos. 
+
+a) Calcule el margen de error aa un nivel de confianza del 95%
+b) Calcule el intervalo de confianza al 95% de la proporción p
+
+
+## Intervalos de confianza para proporciones - Ejemplo
+
+Las formas en las que nos comunicamos se han visto afectadas drásticamente
+por el uso de máquinas contestadoras telefónicas, máquinas de fax,
+correo de voz y correo electrónico. Suponga que un sociólogo quiere determinar
+el porcentaje actual de hogares en Estados Unidos que utilizan el correo electrónico.
+¿Cuántos hogares deben encuestarse para tener una confianza del 95% de
+que el porcentaje muestral es erróneo por no más de 4 puntos porcentuales?
+
+a. Utilice el siguiente resultado de un estudio pionero: en 1997, el 16.9% de
+los hogares estadounidenses usaban correo electrónico (según datos de The
+World Almanac and Book of Facts).
+
+
+## Intervalos de confianza para proporciones - Ejemplo
+El artículo “High-Dose Nicotine Patch Therapy” de Dale, Hurt
+et al. (Journal of the American Medical Association, vol. 274, núm. 17) incluye esta afirmación: “De los 71 sujetos, el 70% se abstuvo de fumar durante 8 semanas (intervalo de confianza [IC] del 95%, del 58% al 81%)”. Utilice esta afirmación para calcular el estimado puntual $\hat{p}$ y el margen de error $E$.
+
+```{r prpoprcion,fig.height = 4, fig.width = 5.6, fig.align = "center", echo = TRUE,warning=FALSE}
+prop.test(71*0.7, 71, alt="two.sided",conf.level = 0.95) 
+```
+
+
+## Intervalos de confianza para la diferencia entre dos medias CASO I
+
+\centering
+```{r, out.width="300px", out.height="150px"}
+knitr::include_graphics("imagenes/media1.jpg")
+```
+
+
+## Intervalos de confianza para la diferencia entre dos medias CASO II
+
+\centering
+```{r, out.width="300px", out.height="150px"}
+knitr::include_graphics("imagenes/media2.jpg")
+```
+
+
+## Intervalos de confianza para la diferencia entre dos medias CASO III
+
+\centering
+```{r, out.width="300px", out.height="150px"}
+knitr::include_graphics("imagenes/media3.jpg")
+```
+
+## Intervalos de confianza para observaciones pareadas
+
+\centering
+```{r, out.width="300px", out.height="150px"}
+knitr::include_graphics("imagenes/media4.jpg")
+```
+
